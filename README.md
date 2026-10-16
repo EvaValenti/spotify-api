@@ -133,42 +133,6 @@ Méthode B — Générer un JWT manuellement via jwt.io
 2. Signez le token avec la clé `JWT_SECRET` définie dans votre `.env`.
 3. Copiez le token et collez-le dans la variable `jwt` de Postman.
 
-Méthode C — Générer automatiquement un JWT dans Postman (Pre-request Script)
-1. Dans une requête Postman, onglet "Pre-request Script", collez le script suivant (exemple simple en utilisant CryptoJS fourni par Postman) :
-
-```javascript
-// Génération d'un JWT simple dans Postman (HS256)
-function base64url(source) {
-  // Encode en base64
-  var encodedSource = CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(source));
-  // Remove padding and make URL-safe
-  encodedSource = encodedSource.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-  return encodedSource;
-}
-
-var header = { alg: 'HS256', typ: 'JWT' };
-var payload = {
-  sub: pm.environment.get('test_user') || 'test-user',
-  iat: Math.floor(Date.now() / 1000),
-  exp: Math.floor(Date.now() / 1000) + 60 * 60 // 1 heure
-};
-
-var encodedHeader = base64url(JSON.stringify(header));
-var encodedPayload = base64url(JSON.stringify(payload));
-var tokenUnsigned = encodedHeader + '.' + encodedPayload;
-var secret = pm.environment.get('jwt_secret') || pm.environment.get('JWT_SECRET');
-var signature = CryptoJS.HmacSHA256(tokenUnsigned, secret);
-var signatureBase64 = CryptoJS.enc.Base64.stringify(signature);
-var encodedSignature = signatureBase64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-var jwt = tokenUnsigned + '.' + encodedSignature;
-
-pm.environment.set('jwt', jwt);
-console.log('JWT généré et stocké dans la variable d\'environnement `jwt`');
-```
-
-2. Exécutez la requête; le script générera un JWT et le stockera dans la variable d'environnement `jwt`.
-3. Utilisez `Authorization: Bearer {{jwt}}` pour vos requêtes.
-
 ---
 
 ## Accéder et utiliser le projet depuis un navigateur
