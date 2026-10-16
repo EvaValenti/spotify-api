@@ -1,0 +1,197 @@
+:root {
+    color-scheme: dark;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #080b09;
+    color: #f4f7f4;
+    accent-color: #1ed760;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    width: min(100% - 2rem, 760px);
+    margin: 0 auto;
+    padding: clamp(2rem, 8vw, 5rem) 0;
+}
+
+h1 {
+    margin: 0 0 2rem;
+    color: #1ed760;
+    font-size: clamp(2rem, 6vw, 3rem);
+    line-height: 1.1;
+}
+
+section {
+    margin-bottom: 1.5rem;
+    padding: clamp(1.25rem, 4vw, 2rem);
+    border: 1px solid #25372c;
+    border-radius: 1rem;
+    background: #111713;
+}
+
+#artists {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+#artists > ul {
+    min-width: 0;
+    margin: 0;
+}
+
+#artists img {
+    width: 100%;
+    max-width: 100px;
+    height: auto;
+    border-radius: 25%;
+}
+
+h2 {
+    margin: 0 0 1.25rem;
+    font-size: 1.35rem;
+}
+
+#displayName {
+    color: #1ed760;
+}
+
+#avatar img {
+    display: block;
+    width: 6rem;
+    height: 6rem;
+    margin-bottom: 1.25rem;
+    border: 3px solid #1ed760;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+ul {
+    display: grid;
+    gap: 0.75rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+li {
+    overflow-wrap: anywhere;
+    color: #c4cec7;
+}
+
+a {
+    color: #1ed760;
+    text-underline-offset: 0.2em;
+}
+
+a:hover {
+    color: #78f59f;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.6rem;
+    font-weight: 700;
+}
+
+input,
+button {
+    min-height: 2.8rem;
+    border: 1px solid #405447;
+    border-radius: 0.55rem;
+    font: inherit;
+}
+
+input {
+    width: min(100%, 28rem);
+    padding: 0.65rem 0.8rem;
+    background: #111713;
+    color: #f4f7f4;
+}
+
+button {
+    margin-left: 0.5rem;
+    padding: 0.65rem 1rem;
+    border-color: #1ed760;
+    background: #1ed760;
+    color: #08100b;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #78f59f;
+}
+
+#songs:empty {
+    display: none;
+}
+
+#songs {
+    display: grid;
+    gap: 0.75rem;
+    padding: 1rem;
+}
+
+#songs > ul {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 1rem;
+    min-width: 0;
+    padding: 0.85rem 1rem;
+    border: 1px solid #25372c;
+    border-radius: 0.75rem;
+    background: #171f1a;
+    transition: border-color 160ms ease, background-color 160ms ease;
+}
+
+#songs > ul:hover {
+    border-color: #1ed760;
+    background: #1b2820;
+}
+
+#songs > ul > li {
+    font-weight: 600;
+}
+
+#songs > ul > button {
+    min-height: 2.4rem;
+    margin: 0;
+    padding: 0.5rem 0.9rem;
+    white-space: nowrap;
+}
+
+#songs > ul > button:disabled {
+    border-color: #405047;
+    background: #29332d;
+    color: #9aa69d;
+    cursor: not-allowed;
+}
+
+:focus-visible {
+    outline: 3px solid #78f59f;
+    outline-offset: 3px;
+}
+
+@media (max-width: 480px) {
+    body {
+        width: min(100% - 1.25rem, 760px);
+        padding-top: 2rem;
+    }
+
+    input {
+        width: 100%;
+    }
+
+    button {
+        width: 100%;
+        margin: 0.75rem 0 0;
+    }
+
+    #songs > ul > button {
+        width: auto;
+        margin: 0;
+    }
+}
